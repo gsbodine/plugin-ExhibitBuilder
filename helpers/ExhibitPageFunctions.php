@@ -116,7 +116,8 @@ function exhibit_builder_page_nav($exhibitPage = null)
     }
 
     $exhibit = $exhibitPage->getExhibit();
-    $html = '<ul class="exhibit-page-nav navigation">' . "\n";
+    $html = '<div class="navbar"><div class="navbar-inner"><a href="/exhibits" class="brand">Exhibits</a>';
+    $html .= '<ul class="exhibit-page-nav navigation nav">' . "\n";
     $pagesTrail = $exhibitPage->getAncestors();
     $pagesTrail[] = $exhibitPage;
     $html .= '<li>';
@@ -127,16 +128,14 @@ function exhibit_builder_page_nav($exhibitPage = null)
         $pageExhibit = $page->getExhibit();
         $pageParent = $page->getParent();
         $pageSiblings = ($pageParent ? exhibit_builder_child_pages($pageParent) : $pageExhibit->getTopPages()); 
-
-        $html .= "<li>\n<ul>\n";
-        foreach ($pageSiblings as $pageSibling) {
+    }
+    $html .= '</ul></div></div><ul class="nav nav-pills">' . "\n";
+    foreach ($pageSiblings as $pageSibling) {
             $html .= '<li' . ($pageSibling->id == $page->id ? ' class="current"' : '') . '>';
             $html .= '<a class="exhibit-page-title" href="' . html_escape(exhibit_builder_exhibit_uri($exhibit, $pageSibling)) . '">';
             $html .= html_escape($pageSibling->title) . "</a></li>\n";
         }
-        $html .= "</ul>\n</li>\n";
-    }
-    $html .= '</ul>' . "\n";
+    $html .= '</ul>';
     $html = apply_filters('exhibit_builder_page_nav', $html);
     return $html;
 }
@@ -156,7 +155,7 @@ function exhibit_builder_child_page_nav($exhibitPage = null)
 
     $exhibit = $exhibitPage->getExhibit();
     $children = exhibit_builder_child_pages($exhibitPage);
-    $html = '<ul class="exhibit-child-nav navigation">' . "\n";
+    $html = '<ul class="exhibit-child-nav navigation nav nav-pills">' . "\n";
     foreach ($children as $child) {
         $html .= '<li><a href="' . html_escape(exhibit_builder_exhibit_uri($exhibit, $child)) . '">' . html_escape($child->title) . '</a></li>';
     }
@@ -356,7 +355,7 @@ function exhibit_builder_page_summary($exhibitPage = null)
 
     $children = $exhibitPage->getChildPages();
     if ($children) {
-        $html .= '<ul>';
+        $html .= '<ul class="nav nav-pills">';
         foreach ($children as $child) {
             $html .= exhibit_builder_page_summary($child);
             release_object($child);

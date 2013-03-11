@@ -22,7 +22,7 @@ function exhibit_builder_edit_page_list($page)
           . '</div>';
 
     if (($children = $page->getChildPages())) {
-        $html .= '<ul>';
+        $html .= '<ul class="nav">';
         foreach ($children as $child) {
             $html .= exhibit_builder_edit_page_list($child);
         }
@@ -509,7 +509,7 @@ function exhibit_builder_attachment_markup($attachment, $fileOptions, $linkPrope
     }
     
     if ($file) {
-        $html = file_markup($file, $fileOptions, null);
+        $html = file_markup($file, $fileOptions, array('class'=>'span4 img-polaroid','style'=>'padding: 1em; margin: 0 2em 2em 0;'));
     } else if($item) {
         $html = exhibit_builder_link_to_exhibit_item(null, $linkProperties, $item);
     }
@@ -534,9 +534,9 @@ function exhibit_builder_attachment_caption($attachment)
         return '';
     }
 
-    $html = '<div class="exhibit-item-caption">'
+    $html = '<div class="exhibitItemCaption well"><small>'
           . $attachment['caption']
-          . '</div>';
+          . '</small></div>';
 
     return apply_filters('exhibit_builder_caption', $html, array(
         'attachment' => $attachment
