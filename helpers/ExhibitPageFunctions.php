@@ -116,26 +116,25 @@ function exhibit_builder_page_nav($exhibitPage = null)
     }
 
     $exhibit = $exhibitPage->getExhibit();
-    $html = '<div class="navbar"><div class="navbar-inner"><a href="/exhibits" class="brand">Exhibits</a>';
-    $html .= '<ul class="exhibit-page-nav navigation nav">' . "\n";
+    $html = '<ul class="exhibitPageNav nav nav-list">' . "\n";
     $pagesTrail = $exhibitPage->getAncestors();
     $pagesTrail[] = $exhibitPage;
     $html .= '<li>';
-    $html .= '<a class="exhibit-title" href="'. html_escape(exhibit_builder_exhibit_uri($exhibit)) . '">';
-    $html .= html_escape($exhibit->title) .'</a></li>' . "\n";
+    $html .= '<a class="exhibitTitle" href="'. html_escape(exhibit_builder_exhibit_uri($exhibit)) . '"><h3>';
+    $html .= html_escape($exhibit->title) .'</h3></a></li>' . "\n";
     foreach ($pagesTrail as $page) {
         $linkText = $page->title;
         $pageExhibit = $page->getExhibit();
         $pageParent = $page->getParent();
         $pageSiblings = ($pageParent ? exhibit_builder_child_pages($pageParent) : $pageExhibit->getTopPages()); 
     }
-    $html .= '</ul></div></div><ul class="nav nav-pills">' . "\n";
+    $html .= '</li></ul><div class="tabbable tabs-right"><ul class="nav nav-tabs">' . "\n";
     foreach ($pageSiblings as $pageSibling) {
             $html .= '<li' . ($pageSibling->id == $page->id ? ' class="current"' : '') . '>';
-            $html .= '<a class="exhibit-page-title" href="' . html_escape(exhibit_builder_exhibit_uri($exhibit, $pageSibling)) . '">';
+            $html .= '<a class="exhibitPageTitle" href="' . html_escape(exhibit_builder_exhibit_uri($exhibit, $pageSibling)) . '">';
             $html .= html_escape($pageSibling->title) . "</a></li>\n";
         }
-    $html .= '</ul>';
+    $html .= '</ul></div>';
     $html = apply_filters('exhibit_builder_page_nav', $html);
     return $html;
 }
