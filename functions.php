@@ -483,11 +483,10 @@ function exhibit_builder_items_browse_sql($args)
 function exhibit_builder_items_search()
 {
     $view = get_view();
-    $html = '<div class="field"><div class="two columns alpha">'
+    $html = '<div class="row"><div class="span8"><fieldset><legend><i class="icon-picture"></i> Exhibit Search</legend>'
           . $view->formLabel('exhibit', __('Search by Exhibit'))
-          . '</div><div class="five columns omega inputs">'
           . $view->formSelect('exhibit', @$_GET['exhibit'], array(), get_table_options('Exhibit'))
-          . '</div></div>';
+          . '</fieldset></div></div>';
     echo $html;
 }
 

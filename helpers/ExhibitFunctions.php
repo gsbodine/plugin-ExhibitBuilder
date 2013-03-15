@@ -135,11 +135,11 @@ function exhibit_builder_exhibit_item_uri($item, $exhibit = null)
     }
 
     //If the exhibit has a theme associated with it
-    if (!empty($exhibit->theme)) {
+    /* if (!empty($exhibit->theme)) {
         return url(array('slug'=>$exhibit->slug, 'item_id'=>$item->id), 'exhibitItem');
-    } else {
+    } else {*/
         return url(array('controller'=>'items','action'=>'show','id'=>$item->id), 'id');
-    }
+    //}
 }
 
 /**
