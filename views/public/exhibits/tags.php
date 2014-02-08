@@ -1,6 +1,6 @@
 <?php
 $title = __('Browse Exhibits by Tag');
-echo head(array('title' => $title, 'bodyclass' => 'exhibits tags'));
+echo head(array('title' => $title, 'bodyid' => 'exhibit', 'bodyclass' => 'tags'));
 ?>
 <h1><?php echo $title; ?></h1>
 
@@ -15,7 +15,7 @@ echo head(array('title' => $title, 'bodyclass' => 'exhibits tags'));
                 'uri' => url('exhibits/tags')
             )
         )
-    ); ?>
+    )->setUlClass('nav nav-tabs'); ?>
 </nav>
 
 <?php echo tag_cloud($tags, 'exhibits/browse'); ?>

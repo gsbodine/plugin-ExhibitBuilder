@@ -1,7 +1,8 @@
 <?php
 echo head(array(
     'title' => metadata('exhibit_page', 'title') . ' &middot; ' . metadata('exhibit', 'title'),
-    'bodyclass' => 'exhibits show'));
+    'bodyid' => 'exhibit',
+    'bodyclass' => 'show'));
 ?>
 
 <nav id="exhibit-pages">
